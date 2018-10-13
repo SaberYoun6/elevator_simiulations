@@ -20,15 +20,37 @@ func isGoingDown(x,y float64)  float64{
    }
    return math.Abs(y-x)
 }
+func gravity(g,r float64) float64{
+   e  := g/math.Pow(r,2)
+   return  e
+}
+func mass(mofbase,massOfMotor,weightofpeople float64) float64{
+   e:= mofbase*massOfMotor*weightofpeople
+   return e
+}
+func radius(radii float64) float64 {
+  e:= math.Pow(radii,2)
+  return e
+}
+func tauengine(torque float64 ) float64{
+  return torque
+}
+func taubolts( mass, distance ,angel,gravity float64) float64{
+   pg :=  mass*distance* gravity*math.Sin(angel)*math.Cos(90.0-angel)
+   return pg
+}
+
 func main() {
  e:= ele{}
- e.name= "Top-like zelda"
- e.bottomFloor =  0.0
- e.finalFloor = 1000.5
- i := isGoingUp(e.bottomFloor,e.finalFloor)
- n := isGoingDown(750.5,e.finalFloor)
- fmt.Printf("%+v",e)
- fmt.Println(i)
- fmt.Println(n)
- fmt.Println("hello W0rld")
+ e.name= "Four-locking mechanism"
+ e.finalFloor=1000.5
+ e.bottomFloor=0.0
+   g:=0.0
+ for i:= 6371.0; i<=42157.0; i++{
+    g=gravity(9.8,i)
+   fmt.Println(g)
+    g+=g
+}
+   fmt.Println(g)
+
 }
