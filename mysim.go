@@ -10,14 +10,13 @@ func isFirstFloor(x *Number) bool{
    return x==nil
 }
 
-func isGoingUp(x *Number, y *Number)* number{
+func goingUp(x , y *Number)* number{
    if isFirstFloor(x) {
-       return  goingUp(y)
+       return  GoingUp(y)
     }
    return isgoingfloor(goingUp(y),goingDown(x))
 }
-func goingUp( x *Number) *Number {
+func isGoingUp( x *Number) *Number {
    if 
-
 
 func main()
