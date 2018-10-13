@@ -21,10 +21,10 @@ func isGoingDown(x,y float64)  float64{
    return math.Abs(y-x)
 }
 func gravity(g,r float64) float64{
-   e  := g/math.Pow(r,2)
+   e  := math.Pow(r,2)/g
    return  e
 }
-func mass(mofbase,massOfMotor,weightofpeople float64) float64{
+func tensile(weight, float64) float64{
    e:= mofbase*massOfMotor*weightofpeople
    return e
 }
@@ -46,7 +46,7 @@ func main() {
  e.finalFloor=1000.5
  e.bottomFloor=0.0
    g:=0.0
- for i:= 6371.0; i<=42157.0; i++{
+ for i:= 0.0; i<=35786.0; i++{
     g=gravity(9.8,i)
    fmt.Println(g)
     g+=g
