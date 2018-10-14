@@ -64,9 +64,8 @@ func main() {
    f:=force(w,g,r)
    forc:=force(w,gd,d)
    froce:=force(w,gd,6731.0)
-   fmt.Printf("force from the distance of the whole stutucre with the the radius include the earth %f , The force from the radius with %f: just from ground to  the orbital platform %f\n",forc,froce,f)
-   gp:= f/6300000000.0*r
-   fmt.Println(g)
-   fmt.Println(gp)
-
+   fmt.Printf("force from the distance of the whole stutucre with the the radius include the earth %f\n The force from the radius with %f:\n just from ground to  the orbital platform %f\n",forc,froce,f)
+   gp:= f/1000*r
+   gdp:=forc/1000*d
+   fmt.Printf("The amount of force divided by the ground to the ortibal platform on the given with the shearing strenght of %f one hair:\nthe force divided by the shearing strength of the materail  is %f of one super thinned nanotubes\n ",gp,gdp)
 }
