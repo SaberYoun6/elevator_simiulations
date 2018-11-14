@@ -1,7 +1,8 @@
 package main
 
-import "math"
-import "fmt"
+import( "math"
+"fmt""
+)
 
 type ele struct{
   name string
