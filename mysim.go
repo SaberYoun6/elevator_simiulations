@@ -1,12 +1,17 @@
 package main
 
 import( "math"
-"fmt""
+"fmt"
 )
 
-type ele struct{
+type SubStruct struct{
+	name string
+	horizontal,veritcal float64,
+}
+
+type Design struct{
   name string
-  bottomFloor,finalFloor float64
+  bottomFloor,finalFloor int
 }
 
 func isGoingUp(x,y float64)  float64{
@@ -36,18 +41,21 @@ func taubolts( mass, distance ,angel,gravity float64) float64{
    pg :=  mass*distance* gravity*math.Sin(angel)*math.Cos(90.0-angel)
    return pg
 }
+func (name string ,wind,earth float64) substruct{
+    
+}
 func force( m, g ,r float64)float64{
   velo := math.Sqrt(r*g/m)
   return  velo
 }
 func main() {
- e:= ele{}
- e.name= "Four-locking mechanism"
- e.finalFloor=1000.5
+ d:= design{}
+ design.name= "Four-locking mechanism"
+ design.finalFloor=16000
  r:= 35768.0
  d:= r+6731.0
- e.bottomFloor=0.0
-   g:=0.0
+ e.bottomFloor=0
+   g:=0
  for i:= 0.0; i<=r; i++{
     g=gravity(9.8,i)
     g+=g
