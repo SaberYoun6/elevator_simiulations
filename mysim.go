@@ -1,12 +1,18 @@
 package main
 
-import( "math"
+import(
+//"math"
 "fmt"
+"errors"
+//"bufio"
 )
-
+type FloorStruct struct {
+     name string
+     length , height , width float64
+}
 type SubStruct struct{
 	name string
-	horizontal,veritcal float64,
+	horizontal , veritcal float64
 }
 
 type Design struct{
@@ -14,18 +20,36 @@ type Design struct{
   bottomFloor,finalFloor int
 }
 
-func isGoingUp(x,y float64)  float64{
-   if x >= y{
-     return x-y
-   }
-   return y-x
+func currentFloor(floor, botFloor, topFloor int) (int , error){
+    // define what floor is being is being called how it called
+    // how high up it goes
+    if floor <  botFloor || floor > topFloor {
+    return 0, errors.New("cannot paritucally call any floor that is lower then the floor that is already stated")
+   } else if  floor > botFloor && floor < topFloor {
+     return  floor, nil
+   } else if floor == botFloor || floor == topFloor {
+     return  floor, nil
+   } else{
+     return floor , errors.New(" I cannotn think of a current error that could come up with this but I'm sure there is.")
+  }
 }
-func isGoingDown(x,y float64)  float64{
-   if x<=y {
-     return math.Abs(x-y)
-   }
-   return math.Abs(y-x)
+func goingUp(currentFloor, floorUpward, topFloor int) (int , error){
+     currentfloor :=  currentFloor + floorUpward
+     if currentfloor > topFloor{
+        return topFloor, errors.New("You have exceed the maxium amount of floors")
+     } else {
+        return currentfloor, nil
+     }
 }
+func goingDown(currentFloor, floorDownard , botFloor int)( int , error) {
+    currentfloor := currentFloor - floorDownard
+    if currentfloor < botFloor{
+    return botFloor, errors.New("You cannot exceed the lowest floor")
+    } else {
+      return  currentfloor, nil
+    }
+}
+/*
 func gravity(g,r float64) float64{
    e  := math.Pow(r,2)/g
    return  e
@@ -41,40 +65,28 @@ func taubolts( mass, distance ,angel,gravity float64) float64{
    pg :=  mass*distance* gravity*math.Sin(angel)*math.Cos(90.0-angel)
    return pg
 }
-func (name string ,wind,earth float64) substruct{
-    
-}
+
+func callengineeringfeet()
 func force( m, g ,r float64)float64{
   velo := math.Sqrt(r*g/m)
   return  velo
 }
+*/
 func main() {
- d:= design{}
- design.name= "Four-locking mechanism"
- design.finalFloor=16000
- r:= 35768.0
- d:= r+6731.0
- e.bottomFloor=0
-   g:=0
- for i:= 0.0; i<=r; i++{
-    g=gravity(9.8,i)
-    g+=g
-}
-   dep:=0.0
- for q:= 6731.0;  q<=d; q++{
-   dep=gravity(9.8,q)
-   dep+=dep
-}
-   deep :=math.Pow(g,2)
-   length :=math.Pow(dep,2)
-   gd:=math.Sqrt(length+deep)
-   fmt.Println(gd)
-   w:=203000.0+185000.0+173000.0
-   f:=force(w,g,r)
-   forc:=force(w,gd,d)
-   froce:=force(w,gd,6731.0)
-   fmt.Printf("force from the distance of the whole stutucre with the the radius include the earth %f\n The force from the radius with %f:\n just from ground to  the orbital platform %f\n",forc,froce,f)
-   gp:= f/1000*r
-   gdp:=forc/1000*d
-   fmt.Printf("The amount of force divided by the ground to the ortibal platform on the given with the shearing strenght of %f one hair:\nthe force divided by the shearing strength of the materail  is %f of one super thinned nanotubes\n ",gp,gdp)
-}
+ floor := 7
+ topFloor := 10
+ botFloor := 0
+ current,err:=currentFloor(floor,botFloor,topFloor)
+ if err != nil {
+        fmt.Println(err)
+ }
+ goingup,err := goingUp(current,2,topFloor)
+ if err != nil {
+       fmt.Println(err)
+ }
+ goingdown,err := goingDown(goingup,6,botFloor)
+ if err != nil {
+      fmt.Println(err)
+ }
+ fmt.Println(goingdown)
+ }
