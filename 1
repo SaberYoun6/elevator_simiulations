@@ -23,7 +23,7 @@ type SubStruct struct{
 
 type Design struct{
   name string
-  direction rune
+  direct rune
   bottomFloor,finalFloor,currentFloor int
   weight float64
 }
@@ -57,7 +57,7 @@ func goingDown(currentFloor, floorDownard , botFloor int)( int , error) {
       return  currentfloor, nil
     }
 }
-
+/*
 func distance( dist_0,dist0,dist_1, dist1, float64) (float64, float64 ,error)
 {
   distx := math.Sqrt(math.Pow((dist_1-dist1+3),2))
@@ -65,24 +65,20 @@ func distance( dist_0,dist0,dist_1, dist1, float64) (float64, float64 ,error)
    if dist0 == dist_0+3 && dist_1 == dist1+3 {
     return dist0,dist1, errors.New("there is no distance that was add ")
    }
-  return distx ,disty ,nil
+  return disty, distx , nil
 }
-func postion (dist0,dist1,time)(float64,float64,error){
-   post0= math.Cbrt(dist1*dist0+math.Pow(time,3))
-   post1= math.Cbrt(dist0*dist1-math.Pow(time,3))
-   if  dist0 >= 0 || dist1 >= 0 && time == 0 {
-      return dist0, dist1, errors.New("you are attemping to break the laws of physics")
-   }
-   return post0 ,post1 ,nil
+func postion (dist0,time)(float64,float64,float64,error){
 }
-func velo(dist0 ,dist1, time float64, direct rune ) (float64, rune , error) {
-  velocity := math.Pow(time,2)/math.Cbrt(dist0*dist1+math.Pow(time,3))
-  if time == 0.0 &&  dist1 != dist0 {
-      return  time ,nil ,errors.New("Has time stopped and you have broken a the laws of physic or just ripped a wormwhole in the fabric of time and space")
+*/
+func velo(post0 ,post1 float64, direct rune ) (float64 , error) {
+  delta= post0
+  velocity  :=  deltadist/time
+  if time == 0.0 && dist1 != dist0 {
+      return  time , errors.New("Has time stopped and you have broken a the laws of physic or just ripped a wormwhole in the fabric of time and space")
   } else if dist1 == dist0 && time >= 0 {
-    return  post0 ,direct, nil
+    return  dist1 , nil
  }
-  return velocity, direct,nil
+  return velocity, nil
 }
 
 func forceFriction(mass , gty , velc float64)  (float64, error) {
@@ -187,6 +183,6 @@ func main() {
       fmt.Println(err)
  }
  fmt.Println(goingdown)
- attempt:=math.Cbrt(float64(16.0))
+ attempt=math.Cbrt(16.0)
  fmt.Println(attempt)
 }
