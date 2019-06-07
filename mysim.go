@@ -1,4 +1,4 @@
-/*Copyright 2018 the Space elevator simiulation Authors. All rights reseverd.
+/*Copyright 2018 the Space elevator simiulation AUTHORS. All rights reseverd.
 use of this source code is governed by a GPL-style
 license that can be found in the LICENSE file.
 
