@@ -64,7 +64,7 @@ func velo(dist0 ,dist1 , time float64) (float64 , error) {
 func forceFriction(mass , gty , velc float64)  (float64, error) {
    force   := mass * gty
    work    := velc * gty
-   forfric := force / work
+   forfric :=  work / force
    if work == 0 {
    return  work, errors.New("work cannot be equal to zero")
   }
@@ -145,7 +145,7 @@ func main() {
   if err != nil {
         fmt.Println(err)
  }
- fmt.Println(force)
+ fmt.Printf("the friction force constants is %.3f\n",force)
  current,err:=currentFloor(floor,botFloor,topFloor)
  if err != nil {
         fmt.Println(err)
