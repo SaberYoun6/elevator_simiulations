@@ -80,7 +80,7 @@ func velo(dist0 ,dist1, time float64, direct rune ) (float64, rune , error) {
   if time == 0.0 &&  dist1 != dist0 {
       return  time ,nil ,errors.New("Has time stopped and you have broken a the laws of physic or just ripped a wormwhole in the fabric of time and space")
   } else if dist1 == dist0 && time >= 0 {
-    return  post0 ,direct, nil
+    return  dist0 ,direct, nil
  }
   return velocity, direct,nil
 }
