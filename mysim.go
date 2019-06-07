@@ -65,8 +65,8 @@ func forceFriction(mass , gty , velc float64)  (float64, error) {
    force   := mass * gty
    work    := velc * gty
    forfric :=  work / force
-   if work == 0 {
-   return  work, errors.New("work cannot be equal to zero")
+   if force == 0 {
+   return  force, errors.New("work cannot be equal to zero")
   }
   return forfric, nil
 }
