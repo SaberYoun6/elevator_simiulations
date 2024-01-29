@@ -61,14 +61,30 @@ func velo(dist0 ,dist1 , time float64) (float64 , error) {
   return velocity, nil
 }
 
-func forceFriction(mass , gty , velc float64)  (float64, error) {
+func convertingDegreesToRadians(ang float64) (float64,error){
+   degreeofPi :=180.0
+   deg :=ang/degreeofPi
+   rads :=deg*3.1415926
+   if rads == math.Inf(-1){
+      return rads, errors.New("then you messed up")
+   }
+   return rads, nil
+}
+
+func staticForceFriction(mass , gty , ang float64)  (float64, error) {
    force   := mass * gty
-   work    := velc * gty
-   forfric :=  work / force
+   forceNormal := -force*math.Cos(ang)
+   fmt.Println(forceNormal)
+   forceNet := force*math.Sin(ang)
+   fmt.Println(forceNet)
+   finalEnergy := math.Sqrt(math.Abs(forceNet)*2*mass)
+   fmt.Println(finalEnergy)
+   forFric :=  forceNormal- finalEnergy
+   fmt.Println(forFric)
    if force == 0 {
    return  force, errors.New("work cannot be equal to zero")
-  }
-  return forfric, nil
+   }
+   return forFric, nil
 }
 //  func  forFrictCon(forK,forNorm float64) (float64, err) {
 //}
@@ -87,15 +103,15 @@ func troque(gravity, mass float64 )  (float64, err){
 
 }
 */
-/*
-func gravity(g,r float64) float64{
-   e  := math.Pow(r,2)/g
-   return  e
+
+func Gravity(g,r float64) float64{
+   gravityNearEarthOutside  := math.Pow(r,2)/g
+   return  gravityNearEarthOutside
 }
-func radius(radii float64) float64 {
-  e:= math.Pow(radii,2)
-  return e
-}
+func Radius(radii float64) float64 {
+  radius:= math.Pow(radii,2)
+  return radius
+}/*
 func tauengine(torque float64 ) float64{
   return torque
 }
@@ -105,19 +121,19 @@ func taubolts( mass, distance ,angel,gravity float64) float64{
 }
 func callengineeringfeet()
 {
-}
+}*/
 func force( m, g ,r float64)float64{
   velo := math.Sqrt(r*g/m)
   return  velo
 }
-*/
+
 
 // assume that gravity is constant for earth 
 // assume that gravity weaks alot at the 80.4672 the furtherest from the orbit
 // we are assumeing that we are at  level
 func main() {
  floor := 7
- gravity:= 9.81
+ gravity:= -9.81
  topFloor := 10
  botFloor := 0
  ground   := 0.0
@@ -128,6 +144,12 @@ func main() {
  max_dist := 99.7793
  ext_dist := 115.873
  mass     := 150.00
+ ang      :=  15.0
+ rad,err  := convertingDegreesToRadians(ang)
+ if err != nil {
+	 fmt.Println(err)
+ }
+ fmt.Println(rad)
  vela,err := velo(ground, min_dist,atime)
  if err != nil{
         fmt.Println(err)
@@ -141,7 +163,7 @@ func main() {
         fmt.Println(err)
  }
  fmt.Printf("The velocity for vela: %.4f\nThe velocity for velb: %.4f\nThe velocity for velc: %.4f\n",vela,velb,velc)
- force,err:=forceFriction(mass,gravity, vela)
+ force,err:=staticForceFriction(mass,gravity,rad)
   if err != nil {
         fmt.Println(err)
  }
