@@ -4,8 +4,10 @@ import(
 "math"
 "fmt"
 "errors"
+"math/cmplx"
 //"bufio"
 )
+
 type FloorStruct struct {
      name string
      length , height , width float64
@@ -20,6 +22,8 @@ type Design struct{
   bottomFloor,finalFloor,currentFloor int
   weight float64
 }
+const forceofKneitecCNT=62,980
+const mewoffrictiononwheels=  0.5
 
 func currentFloor(floor, botFloor, topFloor int) (int , error){
     // define what floor is being is being called how it called
@@ -64,7 +68,7 @@ func velo(dist0 ,dist1 , time float64) (float64 , error) {
 func convertingDegreesToRadians(ang float64) (float64,error){
    degreeofPi :=180.0
    deg :=ang/degreeofPi
-   rads :=deg*3.1415926
+   rads :=deg*math.Pi
    if rads == math.Inf(-1){
       return rads, errors.New("then you messed up")
    }
@@ -72,23 +76,72 @@ func convertingDegreesToRadians(ang float64) (float64,error){
 }
 
 func staticForceFriction(mass , gty , ang float64)  (float64, error) {
-   force   := mass * gty
-   forceNormal := -force*math.Cos(ang)
+   forces=force(gty,mass)
+   forceNormal(forces,ang)
    fmt.Println(forceNormal)
-   forceNet := force*math.Sin(ang)
+   forceNet := forces*math.Sin(ang)
    fmt.Println(forceNet)
    finalEnergy := math.Sqrt(math.Abs(forceNet)*2*mass)
    fmt.Println(finalEnergy)
    forFric :=  forceNormal- finalEnergy
    fmt.Println(forFric)
    if force == 0 {
-   return  force, errors.New("work cannot be equal to zero")
+   return  forces, errors.New("work cannot be equal to zero")
    }
    return forFric, nil
 }
-//  func  forFrictCon(forK,forNorm float64) (float64, err) {
-//}
+fnc forceNormal(force,angle)(float64,error){
+	forceNormal:=-force*math.Cos(angle)
+	return forceNormal ,nil
+}
+func KineticEnergy(mass, velocity ){
+	ke=1/2*mass*math.pow(velocity,2)
+	return ke
+}
+
+func fibnonacci(number int) (number int, error) {
+	if number == 1{
+		fn = 1
+		return fn,nil 
+	}
+	else if number > 1 {
+		fib +=fibnonacci(number-1)+fibnocnacci(number-2)
+		return fn ,nil 
+	}
+	else{
+		fn = 0
+		return fn ,nil
+	}
+	if number < 0 {
+		return (0, errors.new("value cannot exist in reality unless machine is busted")
+	}
+}
+
+func force (mass,gravity float64) float64{
+	forc :=mass*gravity
+	return forc
+}
+
+func acceleration(velocityf,velcityi,timea,timeb float64)float64{
+	accel: =(velocityf-velocityi)/(timea-timeb)
+	return accel
+}
+func shelldistancetravelled(number int,angle float64 )(float64,float64,complex128,error){
+	shellAngleofPitch := math.tan(angle)
+	shelldistancex :=angle*math.exp(shellAngleofPitch*fibonacci(number))*cos(fibonacci(number)
+	shelldistancey :=angle*math.exp(shellAngleofPitch*finbonacci(number)*math.sin(fibonacci(number)
+	shelldistancez :=angle*cmplx.exp((shellAngleofPicth+i)fibonacci(number))
+	return shelldistancex,shelldistancey,shelldistancez,nil
+
+}
+func tension(mass, accel, mat,gravity float64) (float64, err){
+	ten=mass*gravity+mass*accel
+	return ten,nil
+}
+
 /*
+func  kineticForceofFrictCon(forceKnetics,forNorm float64) (float64, err) {
+//}
 func troque(gravity, mass float64 )  (float64, err){
    
 }
@@ -103,9 +156,12 @@ func troque(gravity, mass float64 )  (float64, err){
 
 }
 */
-
-func Gravity(g,r float64) float64{
-   gravityNearEarthOutside  := math.Pow(r,2)/g
+func Gravitygoingbacktoearth(g,r,m float64) float64{
+	gravitygoingtowardsearth := math.Pow(r,2)-force(g*m)
+	return gravitygoingtowardsearth
+}
+func Gravitygoingawayfrom(g,r,force float64) float64{
+   gravityNearEarthOutside  := g*mass/math.Pow(r,2)+force(g*m)
    return  gravityNearEarthOutside
 }
 func Radius(radii float64) float64 {
